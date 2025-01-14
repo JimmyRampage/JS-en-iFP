@@ -1,0 +1,65 @@
+* {
+    margin: 0;
+    padding: 0;
+    color: black;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: silver;
+    /* background-image: url("/EC_04-To_Do/assets/img/BG-GOKU.jpeg"); */
+    background-size: cover;
+    background-position: center;
+    padding: 50px 0;
+    justify-content: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 2em auto;
+    background-color: rgba(138, 43, 226, .5);
+    padding: 2em;
+    border-radius: 25px;
+    border: solid black 2px;
+    width: 75%;
+}
+
+fieldset {
+    border: none;
+    padding: 10px;
+}
+
+#fieldset-ingreso {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: auto;
+}
+
+button {
+    width: 100px;
+}
+hr {
+    border: none;
+    background-color: black;
+    height: 4px;
+    width: 75%;
+    margin: 0 auto;
+}
+
+/* LISTADO */
+#container-listado {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    margin: 2em auto;
+    background-color: rgba(138, 43, 226, .5);
+    padding: 2em;
+    border-radius: 25px;
+    border: solid black 2px;
+    width: 75%;
+}

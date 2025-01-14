@@ -1,0 +1,26 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
+}
+
+header {
+    background-color: #e8a;
+    height: 150px;
+}
+
+main {
+    background-color: #af83bf;
+    height: 100%;
+}
+
+footer {
+    background-color: #e8a;
+    height: 150px;
+}

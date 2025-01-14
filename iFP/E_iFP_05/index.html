@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="---">
+    <meta name="keywords" content="-,-,-">
+    <meta name="author" content="James Ovalle">
+    <title>Document</title>
+
+    <!-- Enlaces -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    
+    <script>
+        function inicio(){
+            createMoths();
+            createYears();
+            cambio();
+        }
+
+        const months = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+
+        function createMoths(){
+            let destino = document.getElementById('months');
+
+            // con la forEach tiene parametros (elemento, indice, array)
+            months.forEach((mes, i) => {
+                let a = document.createElement('option');
+                a.text = mes;
+                a.value = i; // asigna el indice como valor
+                destino.appendChild(a);
+            });
+        }
+
+        function createYears() {
+            let anno = (new Date()).getFullYear();
+
+            let destino = document.getElementById('years');
+
+            for(let i = (anno + 10); i >= (anno - 10); i--){
+                let a = document.createElement('option');
+                a.text = i.toString();
+                a.value = i; // asigna el indice como valor
+                destino.appendChild(a);
+            }
+            destino.selectedIndex = 10;
+        }
+
+        function cambio(){
+            let a = document.getElementById('years').value
+            let b = document.getElementById('months').value
+            document.getElementById('dias-mes').innerHTML = obtenerDiasPorMes(a, months[b]);
+        }
+
+        function bisiesto(anno){
+            let boolean = (anno % 400 == 0) || (anno % 4 == 0 && anno % 100 != 0);
+            return boolean
+        }
+
+        function obtenerDiasPorMes(anno, mes) {
+        daysPerMonth = {"Enero": 31,
+                        "Febrero": (anno % 4 === 0 && (anno % 100 !== 0 || anno % 400 === 0)) ? 29 : 28,
+                        "Marzo": 31,
+                        "Abril": 30,
+                        "Mayo": 31,
+                        "Junio": 30,
+                        "Julio": 31,
+                        "Agosto": 31,
+                        "Septiembre": 30,
+                        "Octubre": 31,
+                        "Noviembre": 30,
+                        "Diciembre": 31
+                    };
+        return daysPerMonth[mes]
+        }
+
+
+        window.onload = function(){
+            inicio()
+        }
+    </script>
+</head>
+<body>
+    <!-- Crear un select con los meses -->
+    <!-- crear un select se año 2025 +- 10 años -->
+    <!-- Al seleccionar un mes y fecha, que en un parrafo diga cuandos dias tiene ese mes -->
+
+    <fieldset>
+        <legend>Fecha</legend>
+        <label for="">Año</label>
+        <select name="" id="years" onchange="cambio()"></select>
+        <label for="">Mes</label>
+        <select name="" id="months" onchange="cambio()"></select>
+        <p>Dias de ese mes <span id="dias-mes" onchange="cambio()">pichula</span></p>
+    </fieldset>
+</body>
+<script src="assets/js/script.js"></script>
+</html>

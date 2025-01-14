@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="---">
+    <meta name="keywords" content="-,-,-">
+    <meta name="author" content="James Ovalle">
+    <title>Document</title>
+
+    <!-- Enlaces -->
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <script>
+        function redondear(numero, decimales){
+            var n = Math.pow(10, decimales);
+            var m = Math.round(n * numero);
+            return m/n;
+        }
+
+        function incremento(quien){
+            var vid = quien.id;
+            var vgc = 0,
+                vgf = 0,
+                vgk = 0;
+            switch (vid) {
+                case "gc":
+                    vgc = parseFloat(quien.value);
+                    vgf = (9 * vgc) / 5 + 32;
+                    vgk = vgc + 273.15;
+                case "gf":
+                    vgf = parseFloat(quien.value);
+                    vgc = (5 * (vgf - 32)) / 9;
+                    vgk = vgc + 273.15;
+                    break;
+                case "gk":
+                    vgk = parseFloat(quien.value);
+                    vgc = vgk - 273.15;
+                    vgf = (9 * vgc) / 5 + 32;
+                    break;
+            }
+            ["gc", "gf", "gk"].forEach(function (destino) {
+                document.getElementById(destino).value = redondear(eval("v" + destino), 2);
+            });
+        }
+
+        function inicio() {
+            ["grs1", "gfs1", "gks1"].forEach(function(destino){
+                newcargar(document.getElementById(destino));
+            });
+        }
+
+        function newcargar(destino) {
+            for(let i = 5; i >= -5; i--){
+                let z = document.createElement("option");
+                z.text = i.toString();
+                z.value = i.toString();
+                destino.appendChild(z);
+            }
+
+            destino.selectedIndex = 5;
+        }
+        function cambiando(quien, destino){
+            if (quien.id == destino){
+                incremento(quien);
+            } else {
+                let vdestino = document.getElementById(destino);
+                vdestino.value = parseFloat(quien.value) + parseFloat(vdestino.value);
+                incremento(vdestino);
+            }
+        }
+        window.onload = function() {
+            inicio();
+        }
+    </script>
+</head>
+<body>
+    <fieldset>
+        <legend>Conversor</legend>
+
+        <!-- GC -->
+        <p>
+            <label for="">GC</label>
+            <input type="number" name="" id="gc" value="0" onchange="cambiando(this, 'gc')">
+            <input type="button" value="+1" onclick="cambiando(this, 'gc')">
+            <input type="button" value="-1" onclick="cambiando(this, 'gc')">
+            <select name="" id="gcs1" onchange="cambiando(this, 'gc')"></select>
+        </p>
+
+        <!-- GF -->
+        <p>
+            <label for="">GF</label>
+            <input type="number" name="" id="gf" value="0" onchange="cambiando(this, 'gf')">
+            <input type="button" value="+1" onclick="cambiando(this, 'gf')">
+            <input type="button" value="-1" onclick="cambiando(this, 'gf')">
+            <select name="" id="gfs1" onchange="cambiando(this, 'gf')"></select>
+        </p>
+
+        <!-- GK -->
+        <p>
+            <label for="">GK</label>
+            <input type="number" name="" id="gk" value="0" onchange="cambiando(this, 'gk')">
+            <input type="button" value="+1" onclick="cambiando(this, 'gk')">
+            <input type="button" value="-1" onclick="cambiando(this, 'gk')">
+            <select name="" id="gks1" onchange="cambiando(this, 'gk')"></select>
+        </p>
+    </fieldset>
+</body>
+<script src="assets/js/script.js"></script>
+</html>

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function redondear(numero, decimales) {
+            //ejemplo numero=13.45678 decimales=2
+
+            var n = Math.pow(10, decimales); //n=100
+            var m = Math.round(n * numero); //m=100*13.45678=1345.678=1346
+            return m / n; //13.46
+        }
+        function incremento(quien) {
+            var vid = quien.id;
+            var vgc = 0,
+                vgf = 0,
+                vgk = 0;
+            switch (vid) {
+                case "gc":
+                    vgc = parseFloat(quien.value);
+                    vgf = (9 * vgc) / 5 + 32;
+                    vgk = vgc + 273.15;
+                    break;
+                case "gf":
+                    vgf = parseFloat(quien.value);
+                    vgc = (5 * (vgf - 32)) / 9;
+                    vgk = vgc + 273.15;
+                    break;
+                case "gk":
+                    vgk = parseFloat(quien.value);
+                    vgc = vgk - 273.15;
+                    vgf = (9 * vgc) / 5 + 32;
+                    break;
+            }
+            /*document.getElementById("gc").value = redondear(vgc, 2);
+            document.getElementById("gf").value = redondear(vgf, 2);
+            document.getElementById("gk").value = redondear(vgk, 2);
+            */
+            ["gc", "gf", "gk"].forEach(function (destino) {
+                document.getElementById(destino).value = redondear(eval("v"+destino), 2);
+
+            });
+        }
+        function inicio() {
+            ["gcs1", "gfs1", "gks1"].forEach(function (destino) {
+                newcargar(document.getElementById(destino));
+            });
+        }
+        function newcargar(destino) {
+            for (let i = 5; i >= -5; i--) {
+                let z = document.createElement("option");
+                z.text = i.toString();
+                z.value = i.toString();
+                destino.appendChild(z);
+            }
+            //destino.addEventListener("change", () => { cambiando(destino); })
+            destino.selectedIndex = 5;
+        }
+        function cambiando(quien, destino) {
+            if (quien.id == destino) {
+                incremento(quien);
+            } else {
+                let vdestino = document.getElementById(destino);
+                vdestino.value = parseFloat(quien.value) + parseFloat(vdestino.value);
+                incremento(vdestino);
+            }
+
+        }
+        window.onload = function () { inicio(); }
+    </script>
+    <style>
+        fieldset {
+            width: 450px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+
+        fieldset,
+        legend {
+            background-color: blue;
+            color: white;
+            border-radius: 25px;
+            border: 4px ridge gold;
+            padding: 10px;
+        }
+
+        fieldset input[type="number"] {
+            width: 100px;
+            text-align: right;
+        }
+
+        fieldset p {
+            margin-left: 20px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        fieldset {
+            width: 450px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+
+        fieldset,
+        legend {
+            background-color: blue;
+            color: white;
+            border-radius: 25px;
+            border: 4px ridge gold;
+            padding: 10px;
+        }
+
+        fieldset input[type="number"] {
+            width: 100px;
+            text-align: right;
+        }
+
+        label {
+            width: 150px;
+            color: white;
+            background-color: blue;
+            display: inline flex;
+        }
+    </style>
+</head>
+
+<body>
+    <fieldset>
+        <legend>Conversión de Temperaturas</legend>
+    <p>
+    <label for="">Grados Centrigrados</label>
+    <input type="number" id="gc" value="0" onchange="cambiando(this,'gc')">
+    <input type="button" value="+1" onclick="cambiando(this,'gc')">
+    <input type="button" value="-1" onclick="cambiando(this,'gc')">
+    <select id="gcs1" onchange="cambiando(this,'gc')"></select>
+    </p>
+    <p>
+        <label for="">Grados Fahrenheit</label>
+        <input type="number" id="gf" value="0" onchange="cambiando(this,'gf')">
+        <input type="button" value="+1" onclick="cambiando(this,'gf')">
+        <input type="button" value="-1" onclick="cambiando(this,'gf')">
+        <select id="gfs1" onchange="cambiando(this,'gf')"></select>
+    </p>
+    <p>
+        <label for="">Grados Kelvin</label>
+        <input type="number" id="gk" value="0" onchange="cambiando(this,'gk')">
+        <input type="button" value="+1" onclick="cambiando(this,'gk')">
+        <input type="button" value="-1" onclick="cambiando(this,'gk')">
+        <select id="gks1" onchange="cambiando(this,'gk')"></select>
+    </p>
+    </fieldset>
+</body>
+
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="---">
+    <meta name="keywords" content="-,-,-">
+    <meta name="author" content="James Ovalle">
+    <title>Document</title>
+
+    <!-- Enlaces -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <script>
+        function inicio(){
+            createOptions(document.getElementById('gc-list'));
+            createOptions(document.getElementById('gf-list'));
+            createOptions(document.getElementById('gk-list'));
+        }
+        function createOptions(destino){
+            for(let i = 5; i >= -5; i--) {
+                let z = document.createElement('option');
+                z.text = i.toString();
+                z.value = i.toString();
+                destino.appendChild(z);
+            }
+            //destino.addEventListener('change', () => {cambiando(destino)})
+            destino.selectedIndex = 5
+        }
+
+        function cambio(origen) {
+            let a = parseInt(document.getElementById('gc').innerHTML);
+            let b = document.querySelector('#' + origen.id).innerHTML;
+            document.getElementById('gc').innerHTML = eval(a + b);
+        }
+    </script>
+</head>
+<body onload="inicio()">
+    <div id="calculadora">
+        <div id="blur-div"></div>
+        <!-- Celcius -->
+        <div id="gc-calculadora" class="calc">
+            <label for="">Grados Celcius</label>
+            <input type="number" id="gc" value="0" onchange="">
+            <button id="gc-btn-1" onchange="cambio(this)">+1</button>
+            <button id="gc-btn-2" onchange="cambio(this)">-1</button>
+            <select name="" id="gc-list" onchange="cambiando(this)">
+            </select>
+        </div>
+        <!-- Fahrenheit -->
+        <div id="gf-calculadora" class="calc">
+            <label for="">Grados Fahrenheit</label>
+            <input type="number" id="gf">
+            <button id="gf-btn-1">+1</button>
+            <button id="gf-btn-2">-1</button>
+            <select name="" id="gf-list">
+            </select>
+        </div>
+        <!-- Kelvin -->
+        <div id="gk-calculadora" class="calc">
+            <label for="">Grados Kelvin</label>
+            <input type="number" id="gk">
+            <button id="gk-btn-1">+1</button>
+            <button id="gk-btn-2">-1</button>
+            <select name="" id="gk-list">
+            </select>
+        </div>
+    </div>
+</body>
+<script src="assets/js/script.js"></script>
+</html>

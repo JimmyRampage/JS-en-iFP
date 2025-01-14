@@ -1,0 +1,10 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+#marco {
+    height: 200px;
+    margin: 20px;
+    border: 5px ridge black;
+}

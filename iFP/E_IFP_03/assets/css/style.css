@@ -1,0 +1,26 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+body {
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+    align-items: center;
+    background: linear-gradient(#33ff77, #99aa11);
+}
+#calculadora {
+    display: flex;
+    flex-direction: column;
+    margin: 50px;
+    align-items: flex-end;
+    width: fit-content;
+    border: solid 3px black;
+    border-radius: 10px;
+}
+button {
+    width: 25px;
+}
+.calc {
+    padding: 10px;
+}
